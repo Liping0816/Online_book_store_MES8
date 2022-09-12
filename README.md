@@ -4,7 +4,7 @@ Assignment for MES3083 software process in June 2022, develop follow Staged-deli
 
 ## Requirements
 
-Complete SRS document: <a href='hhh'>Software Requirement Specification</a>
+Complete SRS document: <a href="./report/SRS for Online Book Store.pdf">Software Requirement Specification Report</a>
 
 It is a online web application for customers to purchase book online. Overall there are 14 functions in this system:
 
