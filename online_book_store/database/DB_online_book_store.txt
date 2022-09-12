@@ -1,0 +1,100 @@
+
+--create 'user'
+
+
+CREATE TABLE user (
+  user_id int(12) NOT NULL AUTO_INCREMENT,
+  Email varchar(100) NOT NULL,
+  user_name varchar(100) NOT NULL,
+  contact_no int(11) NOT NULL,
+  address varchar(255) NOT NULL,
+  password varchar(20) NOT NULL,
+  admin int(2) NOT NULL,
+  credit_card_no int(12) NOT NULL,
+  
+  PRIMARY KEY(user_id)
+   
+) ;
+
+INSERT INTO user(Email, user_name, contact_no, address, password, admin, credit_card_no) VALUES
+('admin1@gmail.com', 'admin1', '111', 'No. a1, Pahang', '1', '1', '001'),
+('admin2@gmail.com', 'admin2', '444', 'No. a2, Pahang', '1', '1', '002'),
+('user1@gmail.com', 'user1', '222', 'No. u1, Pahang', '1', '0', '100'),
+('user2@gmail.com', 'user2', '333', 'No. u2, Pahang', '1', '0', '200');
+
+
+
+--create 'shopping_cart'
+
+CREATE TABLE shopping_cart (
+  cart_id int(12) NOT NULL AUTO_INCREMENT,
+  cart_status varchar(20) NOT NULL DEFAULT 'pending',
+  user_id int(12) NOT NULL,
+  total_price float NOT NULL,
+  payment_date datetime,
+  
+  PRIMARY KEY(cart_id),
+  FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+  
+) ;
+
+ALTER TABLE shopping_cart
+  ADD CONSTRAINT shopping_cart_ibfk_` FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+INSERT INTO shopping_cart(cart_id, cart_status, user_id, total_price, payment_date) VALUES
+('a1', 'pending', '3', '35.00', NULL),    
+('a2', 'paid', '4', '20.00', '2022-03-15 11:29:30');
+
+
+--create 'book'
+
+CREATE TABLE book (
+  book_id int(12) NOT NULL AUTO_INCREMENT,
+  book_isbn varchar(20) NOT NULL,
+  book_title varchar(255) NOT NULL,
+  book_author varchar(255) NOT NULL,
+  book_categories varchar(100) NOT NULL,
+  book_rating float NOT NULL DEFAULT '0.00',
+  book_rating_time int NOT NULL DEFAULT '0',
+  book_price float NOT NULL,
+  book_quantity int NOT NULL,
+  book_detail varchar(255),
+  
+  PRIMARY KEY(book_id)
+    
+) ;
+
+
+INSERT INTO book(book_isbn, book_title, book_author, book_categories, book_rating, book_price, book_quantity, book_detail) VALUES
+('985-1', 'book1', 'author1', 'Novel', '3.5', '15.00', '4', 'book1 testing for novel'),
+('985-2', 'book2', 'author2', 'Novel', '4.0', '10.00', '4', 'book2 testing for novel'),
+('985-3', 'book3', 'author3', 'Recipe', '3.75', '20.00', '4', 'book3 testing for recipe');
+
+
+
+--create 'book_in_cart'
+
+CREATE TABLE book_in_cart (
+  cart_id int(12) NOT NULL,
+  book_id int(12) NOT NULL,
+  quantity int NOT NULL DEFAULT '1',
+  sum_price float NOT NULL,
+  add_date datetime NOT NULL,
+  
+  FOREIGN KEY(cart_id) REFERENCES shopping_cart(cart_id)ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY(book_id) REFERENCES book(book_id)ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY(cart_id,book_id)
+    
+) ;
+
+
+INSERT INTO book_in_cart(cart_id, book_id, quantity, sum_price, add_date) VALUES
+('1', '1', '1', '15.00', '2022-02-21 11:29:30'),
+('1', '2', '2', '20.00', '2022-02-20 11:29:30'),
+('2', '3', '1', '20.00', '2022-03-10 11:29:30');
+
+
+
+
+ 
