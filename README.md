@@ -80,10 +80,6 @@ Home page, View book detail and Rate Book share a similar interface, which inclu
 **Home:**
 <img width="auto" height="auto" src="./image/i3_home.png">
 
-**Header:**
-<img width="auto" height="auto" src="./image/i3_header1.png">
-<img width="auto" height="auto" src="./image/i3_header2.png">
-
 ### 4. Interface 4
 Interface 4 was used to list books, users and orders and carts. 
 
